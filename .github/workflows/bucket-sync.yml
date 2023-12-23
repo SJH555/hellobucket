@@ -2,7 +2,7 @@ name: bucket sync
 
 on:
   schedule:
-    - cron: '0 6,12,18,24 * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   sync:
