@@ -1,9 +1,8 @@
-name: Synchronize Data
+name: bucket sync
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 6,12,18,24 * * *'
 
 jobs:
   sync:
@@ -55,12 +54,16 @@ jobs:
         cp potplayer.json target_repo/bucket/
         cp downkyi.json target_repo/bucket/
 
-    - name: Commit and push changes to target repository
+    - name: Check if there are changes
       run: |
         cd target_repo
-        git config --local user.email "jiahao.song.me@gmail.com"
-        git config --local user.name "SJH"
-        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/SJH555/HelloBucket.git
-        git add bucket/*
-        git commit -m "Synchronize data to the current repository"
-        git push --set-upstream origin main
+        if [[ -n "$(git diff --exit-code)" ]]; then
+          git config --local user.email "jiahao.song.me@gmail.com"
+          git config --local user.name "SJH"
+          git remote set-url origin https://x-access-token:${ACTION_TOKEN}@github.com/SJH555/HelloBucket.git
+          git add bucket/*
+          git commit -m "Synchronize data to the current repository"
+          git push --set-upstream origin main
+        else
+          echo "No changes to commit. Skipping commit and push."
+        fi
