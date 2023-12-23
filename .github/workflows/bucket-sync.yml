@@ -1,0 +1,68 @@
+name: Synchronize Data
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    env:
+      ACTION_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+    - name: Checkout source repository (echoiron/echo-scoop)
+      id: checkout_echo_scoop
+      uses: actions/checkout@v2
+      with:
+        repository: echoiron/echo-scoop
+        path: source_repo_echo_scoop
+        token: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "正在同步源仓库：echoiron/echo-scoop"
+
+    - name: Copy specific files from source repository (echoiron/echo-scoop)
+      run: |
+        cp source_repo_echo_scoop/bucket/bypass.json .
+        cp source_repo_echo_scoop/bucket/eudic.json .
+        cp source_repo_echo_scoop/bucket/potplayer.json .
+
+    - name: Checkout source repository (chawyehsu/dorado)
+      id: checkout_dorado
+      uses: actions/checkout@v2
+      with:
+        repository: chawyehsu/dorado
+        path: source_repo_dorado
+        token: ${{ secrets.GITHUB_TOKEN }}
+      run: echo "正在同步源仓库：chawyehsu/dorado"
+
+    - name: Copy specific file from source repository (chawyehsu/dorado)
+      run: cp source_repo_dorado/bucket/downkyi.json .
+
+    - name: Checkout target repository
+      uses: actions/checkout@v2
+      with:
+        repository: SJH555/HelloBucket
+        path: target_repo
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Copy specific files to target repository
+      run: |
+        mkdir -p target_repo/bucket
+        cp bypass.json target_repo/bucket/
+        cp eudic.json target_repo/bucket/
+        cp potplayer.json target_repo/bucket/
+        cp downkyi.json target_repo/bucket/
+
+    - name: Commit and push changes to target repository
+      run: |
+        cd target_repo
+        git config --local user.email "jiahao.song.me@gmail.com"
+        git config --local user.name "SJH"
+        git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/SJH555/HelloBucket.git
+        git add bucket/*
+        git commit -m "Synchronize data to the current repository"
+        git push --set-upstream origin main
