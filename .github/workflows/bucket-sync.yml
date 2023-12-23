@@ -22,7 +22,6 @@ jobs:
         repository: echoiron/echo-scoop
         path: source_repo_echo_scoop
         token: ${{ secrets.GITHUB_TOKEN }}
-      run: echo "正在同步源仓库：echoiron/echo-scoop"
 
     - name: Copy specific files from source repository (echoiron/echo-scoop)
       run: |
@@ -37,7 +36,6 @@ jobs:
         repository: chawyehsu/dorado
         path: source_repo_dorado
         token: ${{ secrets.GITHUB_TOKEN }}
-      run: echo "正在同步源仓库：chawyehsu/dorado"
 
     - name: Copy specific file from source repository (chawyehsu/dorado)
       run: cp source_repo_dorado/bucket/downkyi.json .
