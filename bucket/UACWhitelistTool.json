@@ -1,0 +1,21 @@
+{
+    "version": "latest",
+    "description": "UACWhitelistTool from XIU2's GitHub repository",
+    "homepage": "https://github.com/XIU2/UACWhitelistTool",
+    "license": "MIT",
+    "url": "https://github.com/XIU2/UACWhitelistTool/releases/latest/download/UACWhitelistTool_v{version}.zip",
+    "extract_dir": "UACWhitelistTool",
+    "bin": [
+        "UACWhitelistTool.exe"
+    ],
+    "post_install": [
+        "Remove-Item $dir\\UACWhitelistTool_v{version}.zip -Force"
+    ],
+    "checkver": {
+        "github": "https://github.com/XIU2/UACWhitelistTool"
+    },
+    "autoupdate": {
+        "url": "https://github.com/XIU2/UACWhitelistTool/releases/latest/download/UACWhitelistTool_v{version}.zip",
+        "extract_dir": "UACWhitelistTool"
+    }
+}
