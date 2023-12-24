@@ -1,10 +1,11 @@
 {
-    "version": "2023.1.5",
+    "version": "",
     "description": "IntelliJ IDEA Community Edition",
     "homepage": "https://www.jetbrains.com/idea/download/",
     "url": "https://download.jetbrains.com/idea/ideaIC-2023.1.5.win.zip",
-    "extract_dir": "$dir\\apps\\IDEA\\2023.1.5", 
+    "extract_dir": "$dir\\apps\\IDEA\\2023.1.5",
     "bin": [
         "bin\\idea64.exe"
-    ]
+    ],
+    "checkver": false
 }
