@@ -1,8 +1,8 @@
 {
     "version": "2023.1.5",
-    "description": "IntelliJ IDEA Community Edition",
-    "homepage": "https://www.jetbrains.com/idea/download/",
-    "url": "https://download.jetbrains.com/idea/ideaIC-2023.1.5.win.zip",
+    "description": "IntelliJ IDEA Ultimate Edition",
+    "homepage": "https://www.jetbrains.com/idea/",
+    "url": "https://download.jetbrains.com/idea/ideaIU-2023.1.5.win.zip",
     "extract_dir": "$dir\\apps\\IDEA\\2023.1.5",
     "bin": [
         "bin\\idea64.exe"
