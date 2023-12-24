@@ -9,7 +9,9 @@
         "UACWhitelistTool.exe"
     ],
     "post_install": [
-        "Remove-Item $dir\\UACWhitelistTool_v{version}.zip -Force"
+        "# 获取已下载的ZIP文件名并删除",
+        "$zipFile = (Get-ChildItem $dir -Filter 'UACWhitelistTool_v*.zip').FullName;",
+        "Remove-Item $zipFile -Force;"
     ],
     "checkver": {
         "github": "https://github.com/XIU2/UACWhitelistTool"
