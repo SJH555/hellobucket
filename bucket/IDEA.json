@@ -3,8 +3,8 @@
     "description": "IntelliJ IDEA Community Edition",
     "homepage": "https://www.jetbrains.com/idea/download/",
     "url": "https://download.jetbrains.com/idea/ideaIC-2023.1.5.win.zip",
-    "extract_dir": "$dir\\apps\\IDEA\\2023.1.5", // 使用相对路径
+    "extract_dir": "$dir\\apps\\IDEA\\2023.1.5", 
     "bin": [
-        "bin\\idea64.exe" // IntelliJ IDEA 的可执行文件路径
+        "bin\\idea64.exe"
     ]
 }
