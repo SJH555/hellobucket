@@ -1,0 +1,19 @@
+{
+    "version": "0.11.18",
+    "description": "A decent markdown editor finally available on Windows",
+    "homepage": "https://typora.io",
+    "license": {
+        "identifier": "Freeware",
+        "url": "https://support.typora.io/License-Agreement/"
+    },
+    "notes": "Free during beta",
+    "url": "http://soft.102323.xyz:9090/typora_0.11.18.7z/#dl.7z",
+    "hash": "55fb97b68de56f3b655fa1143eed6b3664f2f2a84f9850ee1d70d765689e3d51",
+    "bin": "Typora.exe",
+    "shortcuts": [
+        [
+            "Typora.exe",
+            "Typora"
+        ]
+    ]
+}
