@@ -4,8 +4,8 @@
     "homepage": "https://github.com/XIU2/UACWhitelistTool",
     "license": "MIT",
     "url": "https://github.com/XIU2/UACWhitelistTool/releases/download/v1.8.2/UACWhitelistTool_v1.8.2.zip",
-    "extract_dir": "UACWhitelistTool",
+    "extract_dir": "UACWhitelistTool_v1.8.2", 
     "bin": [
-        "UACWhitelistTool.exe"
+        "UAC白名单小工具.exe" 
     ]
 }
