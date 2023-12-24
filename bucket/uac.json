@@ -4,8 +4,8 @@
     "homepage": "https://github.com/XIU2/UACWhitelistTool",
     "license": "MIT",
     "url": "https://github.com/XIU2/UACWhitelistTool/releases/download/v1.8.2/UACWhitelistTool_v1.8.2.zip",
-    "extract_to": "{app}", // 使用{app}占位符，这将使内容直接解压到应用程序的安装目录
+    "extract_dir": "", // 设置为空，使得 Scoop 解压到版本目录
     "bin": [
-        "UAC白名单小工具.exe" // 使用实际的可执行文件名，注意需要使用UTF-8编码保存此JSON文件
+        "UACWhitelistTool_v1.8.2/UAC白名单小工具.exe" // 调整可执行文件路径
     ]
 }
