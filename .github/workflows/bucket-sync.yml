@@ -1,8 +1,12 @@
 name: bucket sync
 
 on:
-  schedule:
-    - cron: '0 0 * * *'
+  push:
+    paths:
+      - 'source_repo_echo_scoop/bucket/bypass.json'
+      - 'source_repo_echo_scoop/bucket/eudic.json'
+      - 'source_repo_echo_scoop/bucket/potplayer.json'
+      - 'source_repo_dorado/bucket/downkyi.json'
 
 jobs:
   sync:
@@ -14,7 +18,7 @@ jobs:
       ACTION_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-    - name: Checkout source repository (echoiron/echo-scoop)
+    - name: Checkout 源代码库 (echoiron/echo-scoop)
       id: checkout_echo_scoop
       uses: actions/checkout@v2
       with:
@@ -22,13 +26,13 @@ jobs:
         path: source_repo_echo_scoop
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Copy specific files from source repository (echoiron/echo-scoop)
+    - name: 从源代码库 (echoiron/echo-scoop) 复制特定文件
       run: |
         cp source_repo_echo_scoop/bucket/bypass.json .
         cp source_repo_echo_scoop/bucket/eudic.json .
         cp source_repo_echo_scoop/bucket/potplayer.json .
 
-    - name: Checkout source repository (chawyehsu/dorado)
+    - name: Checkout 源代码库 (chawyehsu/dorado)
       id: checkout_dorado
       uses: actions/checkout@v2
       with:
@@ -36,17 +40,17 @@ jobs:
         path: source_repo_dorado
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Copy specific file from source repository (chawyehsu/dorado)
+    - name: 从源代码库 (chawyehsu/dorado) 复制特定文件
       run: cp source_repo_dorado/bucket/downkyi.json .
 
-    - name: Checkout target repository
+    - name: Checkout 目标仓库
       uses: actions/checkout@v2
       with:
         repository: SJH555/HelloBucket
         path: target_repo
         token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Copy specific files to target repository
+    - name: 复制特定文件到目标仓库
       run: |
         mkdir -p target_repo/bucket
         cp bypass.json target_repo/bucket/
@@ -54,7 +58,7 @@ jobs:
         cp potplayer.json target_repo/bucket/
         cp downkyi.json target_repo/bucket/
 
-    - name: Check if there are changes
+    - name: 检查是否有更改
       run: |
         cd target_repo
         if [[ -n "$(git diff --exit-code)" ]]; then
@@ -62,8 +66,8 @@ jobs:
           git config --local user.name "SJH"
           git remote set-url origin https://x-access-token:${ACTION_TOKEN}@github.com/SJH555/HelloBucket.git
           git add bucket/*
-          git commit -m "Synchronize data to the current repository"
+          git commit -m "将数据同步到当前仓库"
           git push --set-upstream origin main
         else
-          echo "No changes to commit. Skipping commit and push."
+          echo "没有更改需要提交。跳过提交和推送操作。"
         fi
