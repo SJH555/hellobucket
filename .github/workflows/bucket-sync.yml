@@ -6,6 +6,7 @@ on:
       - 'source_repo_echo_scoop/bucket/bypass.json'
       - 'source_repo_echo_scoop/bucket/eudic.json'
       - 'source_repo_echo_scoop/bucket/potplayer.json'
+      - 'source_repo_echo_scoop/bucket/dingtalk.json'
       - 'source_repo_dorado/bucket/downkyi.json'
 
 jobs:
@@ -31,6 +32,7 @@ jobs:
         cp source_repo_echo_scoop/bucket/bypass.json .
         cp source_repo_echo_scoop/bucket/eudic.json .
         cp source_repo_echo_scoop/bucket/potplayer.json .
+        cp source_repo_echo_scoop/bucket/dingtalk.json  
 
     - name: Checkout 源代码库 (chawyehsu/dorado)
       id: checkout_dorado
@@ -56,6 +58,7 @@ jobs:
         cp bypass.json target_repo/bucket/
         cp eudic.json target_repo/bucket/
         cp potplayer.json target_repo/bucket/
+        cp dingtalk.json target_repo/bucket/
         cp downkyi.json target_repo/bucket/
 
     - name: 检查是否有更改
