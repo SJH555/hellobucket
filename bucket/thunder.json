@@ -4,9 +4,10 @@
     "homepage": "https://github.com/SJH555/HelloBucket/blob/main/package/",
     "license": "MIT",
     "url": "https://github.com/SJH555/HelloBucket/raw/main/package/Thunder.exe",
-    "pre_install": "Invoke-Expression -Command \"& '$dir\\Thunder.exe' /S\"",
+    "pre_install": "Start-Process -FilePath '$dir\\Thunder.exe' -ArgumentList '/S' -Wait"
+
     "bin": [
-        "$dir\\Program\\Thunder.exe"
+        "Program\\Thunder.exe"
     ],
     "shortcuts": [
         [
