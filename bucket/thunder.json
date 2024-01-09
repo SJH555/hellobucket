@@ -4,8 +4,7 @@
     "homepage": "https://github.com/SJH555/HelloBucket/blob/main/package/",
     "license": "MIT",
     "url": "https://github.com/SJH555/HelloBucket/raw/main/package/Thunder.exe",
-    "pre_install": "Start-Process -FilePath '$dir\\Thunder.exe' -ArgumentList '/S' -Wait"
-
+    "pre_install": "Start-Process -FilePath '$dir\\Thunder.exe' -ArgumentList '/S' -Wait",
     "bin": [
         "Program\\Thunder.exe"
     ],
