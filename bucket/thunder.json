@@ -1,0 +1,17 @@
+{
+    "version": "11.1.12",
+    "description": "Thunder",
+    "homepage": "https://github.com/SJH555/HelloBucket/blob/main/package/",
+    "license": "MIT",
+    "url": "https://github.com/SJH555/HelloBucket/raw/main/package/Thunder.exe",
+    "extract_dir": "Thunder", 
+    "bin": [
+        "Thunder\\Program\\Thunder.exe"
+    ],
+    "shortcuts": [
+        [
+            "Thunder\\Program\\Thunder.exe",
+            "Thunder"
+        ]
+    ]
+}
