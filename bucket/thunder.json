@@ -4,14 +4,20 @@
     "homepage": "https://github.com/SJH555/HelloBucket/blob/main/package/",
     "license": "MIT",
     "url": "https://github.com/SJH555/HelloBucket/raw/main/package/Thunder.exe",
-    "pre_install": "Start-Process -FilePath '$dir\\Thunder.exe' -ArgumentList '/S' -Wait",
     "bin": [
         "Program\\Thunder.exe"
     ],
     "shortcuts": [
         [
-            "$dir\\Program\\Thunder.exe",
+            "Program\\Thunder.exe",
             "Thunder"
         ]
-    ]
+    ],
+	"installer": {
+		"script": [
+			"Expand-7ZipArchive \"$dir\\Thunder.exe\" \"$dir\\\" -Removal",
+			"Move-Item \"$dir\\Thunder\\*\" \"$dir\" -Force",
+			"Remove-Item \"$dir\\Thunder\" -Force -Recurse"
+		]
+	}
 }
