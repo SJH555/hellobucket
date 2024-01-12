@@ -3,7 +3,7 @@
     "description": "PanDownload 公测版",
     "homepage": "https://pandownload.net/",
     "url": "https://github.com/SJH555/HelloBucket/blob/main/package/PanDownload_公测版_0.1.6_ALL.zip",
-    "extract_dir": "PanDownload_公测版_0.1.6_ALL.zip",
+    "extract_dir": "",
     "bin": [
         "PanDownload.exe"
     ],
