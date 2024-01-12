@@ -1,0 +1,23 @@
+{
+    "version": "0.1.6",
+    "description": "PanDownload 公测版",
+    "homepage": "https://pandownload.net/",
+    "url": "https://developer-oss.lanrar.com/file/?VDJWaA08VGVTWgI6ADVRPVdoVW1RXgdkAWgGRFVmAXdTPVNoDT9SZ1FjAwoCsweDUqRQs1e9VN0G5lLdVoJUClRkVi8NYVQuUzMCCwAVURxXQVV+UXQHbAF2BiZVbwFpUz9TYQ0PUm9RYwNoAm8HNlI+UGxXO1RuBjNSYVYsVDNUJ1Y8DWFUNVM1AmwAYFFmVzxVaFEoB3UBdgY9VTsBMFNhUzYNf1I3UTYDegJkBzBSJ1A3Vz9UZgY1UjVWPFRtVDBWNg1gVGRTZwIwAGxRYVc+VWdRbQdmATQGOFU7ATVTMlNmDTJSMlE1A2YCNAdnUmpQe1dyVD8GcVJyVn9UJlQxVnMNOVRkUzgCZQBmUWlXPFVkUTYHNgEgBnRVYAFtUzZTYg1tUjdRMANlAmMHNlI+UGBXP1RjBjBSelYkVHNUMlZtDSdUPVM0AmMAZFFlVz1VZlE6BzIBMgY3VS8BdVMjU3MNbVI3UTEDYwJvBzJSPVBsVzxUZwY2UnJWf1Q8VCRWPA1hVDFTNwJ6AGBRY1cjVWFRNwcrATIGNQ==",
+    "extract_dir": "PanDownload_公测版_0.1.6_ALL.zip",
+    "bin": [
+        "PanDownload.exe"
+    ],
+    "shortcuts": [
+        [
+            "PanDownload.exe",
+            "PanDownload"
+        ]
+    ],
+    "installer": {
+        "script": [
+            "Expand-7ZipArchive \"$dir\\PanDownload_公测版_0.1.6_ALL.zip\" \"$dir\\\" -Removal",
+            "Move-Item \"$dir\\PanDownload_公测版_0.1.6_ALL\\*\" \"$dir\" -Force",
+            "Remove-Item \"$dir\\PanDownload_公测版_0.1.6_ALL\" -Force -Recurse"
+        ]
+    }
+}
