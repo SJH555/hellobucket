@@ -11,10 +11,5 @@
             "PanDownload.exe",
             "PanDownload"
         ]
-    ],
-    "installer": {
-        "script": [
-            
-        ]
-    }
+    ]
 }
