@@ -14,8 +14,7 @@
     ],
     "installer": {
         "script": [
-            "Move-Item \"$dir\\PanDownload_公测版_0.1.6_ALL\\*\" \"$dir\" -Force",
-            "Remove-Item \"$dir\\PanDownload_公测版_0.1.6_ALL\" -Force -Recurse"
+            
         ]
     }
 }
