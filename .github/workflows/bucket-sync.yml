@@ -8,6 +8,7 @@ on:
       - 'source_repo_echo_scoop/bucket/potplayer.json'
       - 'source_repo_echo_scoop/bucket/dingtalk.json'
       - 'source_repo_dorado/bucket/downkyi.json'
+      - 'source_repo_apps/bucket/wechat.json'
 
 jobs:
   sync:
@@ -45,6 +46,17 @@ jobs:
     - name: 从源代码库 (chawyehsu/dorado) 复制特定文件
       run: cp source_repo_dorado/bucket/downkyi.json .
 
+    - name: Checkout 源代码库 (DoveBoy/Apps) 
+      id: checkout_apps
+      uses: actions/checkout@v2
+      with:
+        repository: DoveBoy/Apps
+        path: source_repo_apps
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: 从源代码库 (DoveBoy/Apps) 复制特定文件 
+      run: cp source_repo_apps/bucket/wechat.json .
+
     - name: Checkout 目标仓库
       uses: actions/checkout@v2
       with:
@@ -60,17 +72,4 @@ jobs:
         cp potplayer.json target_repo/bucket/
         cp dingtalk.json target_repo/bucket/
         cp downkyi.json target_repo/bucket/
-
-    - name: 检查是否有更改
-      run: |
-        cd target_repo
-        if [[ -n "$(git diff --exit-code)" ]]; then
-          git config --local user.email "jiahao.song.me@gmail.com"
-          git config --local user.name "SJH"
-          git remote set-url origin https://x-access-token:${ACTION_TOKEN}@github.com/SJH555/HelloBucket.git
-          git add bucket/*
-          git commit -m "将数据同步到当前仓库"
-          git push --set-upstream origin main
-        else
-          echo "没有更改需要提交。跳过提交和推送操作。"
-        fi
+        cp wechat.json target_repo/bucket/ 
