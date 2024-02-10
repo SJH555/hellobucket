@@ -1,18 +1,13 @@
-name: bucket sync
+name: Hourly Sync and Sync on Commit
 
 on:
   push:
     branches:
       - '*' # 监听所有分支的推送事件
     paths:
-      - 'source_repo_echo_scoop/bucket/bypass.json'
-      - 'source_repo_echo_scoop/bucket/eudic.json'
-      - 'source_repo_echo_scoop/bucket/potplayer.json'
-      - 'source_repo_echo_scoop/bucket/dingtalk.json'
-      - 'source_repo_dorado/bucket/downkyi.json'
-      - 'source_repo_apps/bucket/wechat.json'
-  release:
-    types: [published] # 当发布时触发
+      - '.github/workflows/sync.yml' # 当工作流程文件发生改变时触发
+  schedule:
+    - cron: '0 */2 * * *' # 每隔两小时执行一次，从每小时的第0分钟开始
 
 jobs:
   sync:
@@ -24,56 +19,53 @@ jobs:
       ACTION_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
-    - name: Checkout 源代码库 (echoiron/echo-scoop)
-      id: checkout_echo_scoop
-      uses: actions/checkout@v2
-      with:
-        repository: echoiron/echo-scoop
-        path: source_repo_echo_scoop
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout 源代码库 (echoiron/echo-scoop)
+        uses: actions/checkout@v2
+        with:
+          repository: echoiron/echo-scoop
+          path: source_repo_echo_scoop
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 从源代码库 (echoiron/echo-scoop) 复制特定文件
-      run: |
-        cp source_repo_echo_scoop/bucket/bypass.json .
-        cp source_repo_echo_scoop/bucket/eudic.json .
-        cp source_repo_echo_scoop/bucket/potplayer.json .
-        cp source_repo_echo_scoop/bucket/dingtalk.json  
+      - name: 从源代码库 (echoiron/echo-scoop) 复制特定文件
+        run: |
+          cp source_repo_echo_scoop/bucket/bypass.json .
+          cp source_repo_echo_scoop/bucket/eudic.json .
+          cp source_repo_echo_scoop/bucket/potplayer.json .
+          cp source_repo_echo_scoop/bucket/dingtalk.json  
 
-    - name: Checkout 源代码库 (chawyehsu/dorado)
-      id: checkout_dorado
-      uses: actions/checkout@v2
-      with:
-        repository: chawyehsu/dorado
-        path: source_repo_dorado
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout 源代码库 (chawyehsu/dorado)
+        uses: actions/checkout@v2
+        with:
+          repository: chawyehsu/dorado
+          path: source_repo_dorado
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 从源代码库 (chawyehsu/dorado) 复制特定文件
-      run: cp source_repo_dorado/bucket/downkyi.json .
+      - name: 从源代码库 (chawyehsu/dorado) 复制特定文件
+        run: cp source_repo_dorado/bucket/downkyi.json .
 
-    - name: Checkout 源代码库 (DoveBoy/Apps) 
-      id: checkout_apps
-      uses: actions/checkout@v2
-      with:
-        repository: DoveBoy/Apps
-        path: source_repo_apps
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout 源代码库 (DoveBoy/Apps) 
+        uses: actions/checkout@v2
+        with:
+          repository: DoveBoy/Apps
+          path: source_repo_apps
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 从源代码库 (DoveBoy/Apps) 复制特定文件 
-      run: cp source_repo_apps/bucket/wechat.json .
+      - name: 从源代码库 (DoveBoy/Apps) 复制特定文件 
+        run: cp source_repo_apps/bucket/wechat.json .
 
-    - name: Checkout 目标仓库
-      uses: actions/checkout@v2
-      with:
-        repository: SJH555/HelloBucket
-        path: target_repo
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Checkout 目标仓库
+        uses: actions/checkout@v2
+        with:
+          repository: SJH555/HelloBucket
+          path: target_repo
+          token: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: 复制特定文件到目标仓库
-      run: |
-        mkdir -p target_repo/bucket
-        cp bypass.json target_repo/bucket/
-        cp eudic.json target_repo/bucket/
-        cp potplayer.json target_repo/bucket/
-        cp dingtalk.json target_repo/bucket/
-        cp downkyi.json target_repo/bucket/
-        cp wechat.json target_repo/bucket/
+      - name: 复制特定文件到目标仓库
+        run: |
+          mkdir -p target_repo/bucket
+          cp bypass.json target_repo/bucket/
+          cp eudic.json target_repo/bucket/
+          cp potplayer.json target_repo/bucket/
+          cp dingtalk.json target_repo/bucket/
+          cp downkyi.json target_repo/bucket/
+          cp wechat.json target_repo/bucket/ 
