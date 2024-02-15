@@ -1,16 +1,33 @@
 {
-    "version": "7.1.0.10199111",
+    "version": "7.5.5",
     "description": "An All-in-one Mobile Workplace",
     "homepage": "https://www.dingtalk.com/",
     "license": "BSD-3-Clause",
-    "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_updater/Release/DingTalkUpdate_v7.1.0.10199111.zip#/dl.7z",
+    "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_downloader/dingtalk_downloader.exe#/dl.7z",
     "shortcuts": [
         [
             "DingTalk.exe",
             "DingTalk"
         ]
     ],
-    "ext": {
-        "note": "latest download, replace version number"
+    "installer": {
+        "script": [
+            "# handle runtime cache",
+            "Import-Module $(Join-Path $(Find-BucketDirectory -Root -Name apps) scripts/AppsUtils.psm1)",
+            "Mount-ExternalRuntimeData -Source \"$persist_dir\\appdata\" -Target \"$env:LOCALAPPDATA\\DingTalk_91\"",
+            "Mount-ExternalRuntimeData -Source \"$persist_dir\\appdata\" -Target \"$env:APPDATA\\DingTalk\"",
+            "Remove-Module -Name AppsUtils"
+        ]
+    },
+    "uninstaller": {
+        "script": [
+            "Import-Module $(Join-Path $(Find-BucketDirectory -Root -Name apps) scripts/AppsUtils.psm1)",
+            "Dismount-ExternalRuntimeData -Target \"$env:LOCALAPPDATA\\DingTalk_91\"",
+            "Dismount-ExternalRuntimeData -Target \"$env:APPDATA\\DingTalk\"",
+            "Remove-Module -Name AppsUtils"
+        ]
+    },
+    "autoupdate": {
+        "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_installer/Release/DingTalk_v$version.exe#/dl.7z"
     }
 }
