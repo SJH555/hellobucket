@@ -10,5 +10,8 @@
             "Bypass.exe",
             "Bypass"
         ]
-    ]
+    ],
+    "autoupdate": {
+    "url": "https://www.bypass.cn/api/download?name=Bypass.zip#/dl.7z"
+    }
 }
