@@ -1,14 +1,15 @@
 {
-    "version": "7.5.5",
-    "description": "An All-in-one Mobile Workplace",
+    "version": "7.5.0.13119104",
+    "description": "An all-in-one free communication and collaboration platform",
     "homepage": "https://www.dingtalk.com/",
-    "license": "BSD-3-Clause",
+    "license": {
+        "identifier": "EULA",
+        "url": "https://tms.dingtalk.com/markets/dingtalk/service-terms-zh"
+    },
     "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_downloader/dingtalk_downloader.exe#/dl.7z",
-    "shortcuts": [
-        [
-            "DingTalk.exe",
-            "DingTalk"
-        ]
+    "pre_install": [
+        "Move-Item -Path \"$dir\\build\\dist\\*\" -Destination \"$dir\" -Force",
+        "Remove-Item \"$dir\\build\", \"$dir\\setup.xml\", \"$dir\\uninst*\" -Force -Recurse"
     ],
     "installer": {
         "script": [
@@ -27,7 +28,17 @@
             "Remove-Module -Name AppsUtils"
         ]
     },
+    "shortcuts": [
+        [
+            "Dingtalk.exe",
+            "DingTalk"
+        ]
+    ],
     "autoupdate": {
-        "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_installer/Release/DingTalk_v$version.exe#/dl.7z"
+        "url": "https://dtapp-pub.dingtalk.com/dingtalk-desktop/win_downloader/dingtalk_downloader.exe#/dl.7z",
+        "hash": {
+            "url": "https://im.dingtalk.com/manifest/x64/release_windows_vista_later_gray4.json",
+            "jsonpath": "$.win.install.md5"
+        }
     }
 }
