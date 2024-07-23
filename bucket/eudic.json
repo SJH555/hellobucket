@@ -3,7 +3,7 @@
     "description": "权威的英语词典软件 英语学习者必备的工具",
     "homepage": "https://www.eudic.net/",
     "license": "BSD-3-Clause",
-    "url": "https://static.frdic.com/pkg/eudic_win.zip",
+    "url": "https://static.frdic.com/pkg/eudic_win.zip?v=2024-07-16",
     "installer": {
         "script": [
             "Expand-7ZipArchive \"$dir\\eudic_win.exe\" \"$dir\\\" -Removal",
