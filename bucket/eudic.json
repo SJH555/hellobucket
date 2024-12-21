@@ -6,7 +6,7 @@
     "architecture": {
         "64bit": {
             "url": "https://static.frdic.com/pkg/eudic_win.zip",
-            "hash": "35259029a2ffc9131e5e63e3b2663e9e13874df5"
+            "hash": "e64ea06307fe9e339d20d2bdfd4f5b0840803378642bf7443e0cf9186f5978a4"
         },
         "32bit": {
             "url": "https://static.frdic.com/pkg/eudic_win32.zip",
