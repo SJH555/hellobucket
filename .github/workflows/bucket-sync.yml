@@ -2,7 +2,7 @@ name: bucket sync
 
 on:
   schedule:
-    - cron: '0 0 1 1 *'  # 每年的 1 月 1 日执行一次，时间为午夜（UTC 时间）
+    - cron: '0 0 */2 * *'  # 每隔 48 小时（UTC 时间）运行一次
 
 jobs:
   sync:
@@ -23,20 +23,8 @@ jobs:
 
       - name: Copy specific files from source repository (echoiron/echo-scoop)
         run: |
-          cp source_repo_echo_scoop/bucket/bypass.json .
           cp source_repo_echo_scoop/bucket/eudic.json .
-          cp source_repo_echo_scoop/bucket/potplayer.json .
           cp source_repo_echo_scoop/bucket/dingtalk.json .
-
-      - name: Checkout source repository (chawyehsu/dorado)
-        uses: actions/checkout@v2
-        with:
-          repository: chawyehsu/dorado
-          path: source_repo_dorado
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Copy specific file from source repository (chawyehsu/dorado)
-        run: cp source_repo_dorado/bucket/downkyi.json .
 
       - name: Checkout target repository
         uses: actions/checkout@v2
@@ -48,16 +36,13 @@ jobs:
       - name: Copy specific files to target repository
         run: |
           mkdir -p target_repo/bucket
-          cp bypass.json target_repo/bucket/
           cp eudic.json target_repo/bucket/
-          cp potplayer.json target_repo/bucket/
           cp dingtalk.json target_repo/bucket/
-          cp downkyi.json target_repo/bucket/
 
       - name: Check if there are changes
         run: |
           cd target_repo
-          if [[ -n "$(git diff --exit-code)" ]]; then
+          if [[ -n "$(git status --porcelain)" ]]; then
             git config --local user.email "jiahao.song.me@gmail.com"
             git config --local user.name "SJH"
             git add bucket/*
