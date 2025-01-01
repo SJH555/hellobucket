@@ -1,13 +1,85 @@
 {
-    "version": "1.7.22314",
-    "description": "multimedia player",
-    "homepage": "https://potplayer.daum.net",
-    "license": "BSD-3-Clause",
-    "url": "https://xmod-my.sharepoint.cn/:u:/g/personal/admin_xmod_partner_onmschina_cn/Ebih3LTWSEBMqIn_fPGo348B4W3F-Nzyghdml-EkxQvUoQ?download=1#/dl.7z",
-    "shortcuts": [
+  "version": "241216",
+  "description": "PotPlayer. Highly customizable media player",
+  "homepage": "https://potplayer.daum.net",
+  "license": {
+    "identifier": "Freeware",
+    "url": "https://potplayer.daum.net/publicRelation"
+  },
+  "changelog": "https://t1.daumcdn.net/potplayer/PotPlayer/v4/Update2/UpdateEng.html",
+  "architecture": {
+    "64bit": {
+      "url": "https://t1.daumcdn.net/potplayer/PotPlayer/Version/241211/PotPlayerSetup64.exe#/dl.7z",
+      "hash": "eaa8093b54ed7f0f966c798360716f23498212a28b11283f3bf269e9de6fe43c",
+      "shortcuts": [
         [
-            "PotPlayerMini64.exe",
-            "PotPlayer"
+          "PotPlayer64.exe",
+          "PotPlayer"
+        ],
+        [
+          "PotPlayerMini64.exe",
+          "PotPlayer Mini"
         ]
-    ]
+      ]
+    },
+    "32bit": {
+      "url": "https://t1.daumcdn.net/potplayer/PotPlayer/Version/241211/PotPlayerSetup.exe#/dl.7z",
+      "hash": "73cda1ccc1c2c3c838b9d6974c3fcfc398be4d25cfa963b1ce46a003bf2c55db",
+      "shortcuts": [
+        [
+          "PotPlayer.exe",
+          "PotPlayer"
+        ],
+        [
+          "PotPlayerMini.exe",
+          "PotPlayer Mini"
+        ]
+      ]
+    }
+  },
+  "pre_install": [
+    "Remove-Item \"$dir\\`$*\" -Force -Recurse",
+    "$CONT = @(",
+    "    '[Settings]'",
+    "    'AutoUpdateStart=0'",
+    "    'CheckAutoUpdate=0'",
+    "    'FastAutoUpdate=0'",
+    ")",
+    "    # Set Configs for all executables",
+    "foreach ($f in @('PotPlayerMini64.ini', 'PotPlayerMini.ini', 'PotPlayer64.ini', 'PotPlayer.ini')) {",
+    "    if (-not (Test-Path \"$persist_dir\\$f\")) {",
+    "        Write-Host 'File' $f 'does not exists. Creating' -f Yellow",
+    "        Set-Content \"$dir\\$f\" $CONT -Encoding Ascii",
+    "    }",
+    "}"
+  ],
+  "persist": [
+    "Capture",
+    "Extension",
+    "Extention",
+    "IconPack",
+    "Logos",
+    "Module",
+    "Playlist",
+    "Skins",
+    "UrlList",
+    "PotPlayer.ini",
+    "PotPlayer64.ini",
+    "PotPlayerMini.ini",
+    "PotPlayerMini64.ini"
+  ],
+  "checkver": {
+    "url": "https://t1.daumcdn.net/potplayer/PotPlayer/v4/Update2/UpdateEng.html",
+    "regex": "\\[(\\d+)\\]"
+  },
+  "autoupdate": {
+    "architecture": {
+      "64bit": {
+        "url": "https://t1.daumcdn.net/potplayer/PotPlayer/Version/$version/PotPlayerSetup64.exe#/dl.7z"
+      },
+      "32bit": {
+        "url": "https://t1.daumcdn.net/potplayer/PotPlayer/Version/$version/PotPlayerSetup.exe#/dl.7z"
+      }
+    }
+  }
 }
